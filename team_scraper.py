@@ -17,7 +17,7 @@ def main():
                'SAC', 'MEM', 'NOP',
                'HOU', 'SAS', 'DAL',]
     
-    url = f'https://www.basketball-reference.com/teams/GSW/2024/gamelog/'
+    url = f'https://www.basketball-reference.com/teams/GSW/2024/gamelog-advanced/'
     
     response = requests.get(url)
 
@@ -27,9 +27,13 @@ def main():
         print(f'Status code: {response.status_code}')
     
     soup = BeautifulSoup(content, 'html.parser')
-    rows = soup.find_all('tr')
+    tds = soup.find_all('td', attrs={'data-stat': True})
+    
+    for td in tds:
+        print(f"Data-stat: {td['data-stat']}, Value: {td.text}")
 
-    if rows:
+
+    """if rows:
         with open('test_gsw.csv', 'w', newline='') as csvfile:
             
             field_names = ['Rk', 'G', 'Date', 
@@ -49,7 +53,7 @@ def main():
             for row in rows:
                 data_cells = row.find_all(['td', 'th'])
                 row_data = [cell.text.strip() for cell in data_cells]
-                print(row_data)
+                print(row_data)"""
             
 
 
