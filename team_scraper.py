@@ -12,8 +12,6 @@ def main():
     header_written = False
 
     ignore_columns = {'opp_efg_pct', 'opp_tov_pct', 'opp_id', 'opp_pts', 'opp_ft_rate'}
-    # ts_pct,opp_efg_pct,drb_pct,opp_tov_pct,opp_id,ast_pct,efg_pct,x,fg3a_per_fga_pct,opp_pts,ft_rate,team_id,pace,tov_pct,opp_ft_rate,pts,game_location,trb_pct,blk_pct,game_result,date_game,fta_per_fga_pct,stl_pct,game_season,def_rtg,orb_pct,off_rtg
-
     for team in team_ids: 
         url = f'https://www.basketball-reference.com/teams/{team}/2024/gamelog-advanced/'
         
@@ -52,10 +50,9 @@ def main():
         
         with open('game_stats.csv', 'a', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=columns)
-            if header_written == False:
+            if not header_written:
                 writer.writeheader()
                 header_written = True
-
 
             for row in game_data:
                 if len(row) > 1:
