@@ -6,8 +6,7 @@ import time
 from bs4 import BeautifulSoup
 
 def main():
-
-    for year in range(2018, 2023):
+    for year in range(2013, 2023):
         url = f"https://www.basketball-reference.com/draft/NBA_{year}.html"
 
         response = requests.get(url)
@@ -24,7 +23,7 @@ def main():
         player_row = {}
         columns = set()
         columns.add('year')
-        
+
         player_data = []
         header_written = False
         for td in tds:
@@ -52,7 +51,7 @@ def main():
             for row in player_data:
                 if len(row) > 1:
                     writer.writerow(row)
-        time.sleep(4)
+        time.sleep(3)
 
 
 if __name__ == "__main__":
