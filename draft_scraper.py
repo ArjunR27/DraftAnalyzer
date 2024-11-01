@@ -6,6 +6,7 @@ import time
 from bs4 import BeautifulSoup
 
 def main():
+    header_written = False
     for year in range(2013, 2023):
         url = f"https://www.basketball-reference.com/draft/NBA_{year}.html"
 
@@ -25,7 +26,6 @@ def main():
         columns.add('year')
 
         player_data = []
-        header_written = False
         for td in tds:
             # print(td['data-stat'], td.text.strip())
             player_row['year'] = year
